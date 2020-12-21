@@ -29,3 +29,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    app.book_cart:
+        class: App\Entity\Cart\Cart
+        arguments: ['@session', '@doctrine.orm.default_entity_manager']
+
+    app.discount_helper:
+        class: App\Entity\Discount\DiscountHelper
+        arguments: ['@app.book_cart']
+
+    App\Entity\Cart\CartInterface: '@app.book_cart'
+        #autowire: true
+
+    App\Entity\Discount\DiscountHelper: '@app.discount_helper'

@@ -47,4 +47,14 @@ class CategoryRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function saveCategory($name){
+        $newCategory = new Category();
+
+        $newCategory
+            ->setName($name);
+
+        $this->manager->persist($newCategory);
+        $this->manager->flush();
+    }
 }

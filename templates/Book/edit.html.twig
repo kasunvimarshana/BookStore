@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main role="main" class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Book Edit [{{ book.name }}]</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col col-12">
+            <form action="{{ action }}" methos="POST" class="form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" required="required" value="{{book.name}}">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" class="form-control" placeholder="Enter Price" required="required" step="any" value="{{book.price}}">
+                </div>
+                <div class="form-group">
+                    <label for="category_id">Category</label>
+                    <select class="form-control" id="category_id" name="category_id" required="required">
+                    {% for c in categories %}
+                        <option value="{{c.id}}" {{ (c.id == book.categoryid.id) ? "selected" : "" }}>{{c.name}}</option>
+                    {% endfor %} 
+                </select>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3">{{book.description}}</textarea>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

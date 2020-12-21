@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main role="main" class="container-fluid">
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, item in cart.getCart() %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>${{ item.price|format_number({fraction_digit: 2}) }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.amount|format_number({fraction_digit: 2}) }}</td>
+                    </tr>
+                {% endfor %} 
+                <tr>
+                    <td colspan="3">Sub Total</td>
+                    <td colspan="2">${{ cart.getSubTotal()|format_number({fraction_digit: 2}) }}</td>
+                </tr>
+                {% for key, discount in cart.getDiscount() %}
+                <tr>
+                    <td colspan="3">{{ discount.name }}</td>
+                    <td colspan="2">${{ discount.amount|format_number({fraction_digit: 2}) }}</td>
+                </tr> 
+                {% endfor %} 
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td colspan="2">${{ cart.getTotal()|format_number({fraction_digit: 2}) }}</td>
+                </tr> 
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col col-12">
+            <form action="{{ action }}" methos="POST" class="form">
+                <div class="form-group">
+                    <label for="billing_address">Billing Address</label>
+                    <textarea class="form-control" id="billing_address" name="billing_address" rows="3" required="required"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

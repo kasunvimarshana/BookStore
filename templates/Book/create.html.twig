@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main role="main" class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Book</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col col-12">
+            <form action="{{ action }}" methos="POST" class="form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" class="form-control" placeholder="Enter Price" required="required" step="any">
+                </div>
+                <div class="form-group">
+                    <label for="category_id">Category</label>
+                    <select class="form-control" id="category_id" name="category_id" required="required">
+                    {% for c in categories %}
+                        <option value="{{c.id}}">{{c.name}}</option>
+                    {% endfor %} 
+                </select>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.categoryid.name }}</td>
+                        <td>{{ book.price }}</td>
+                        <td>
+                            <a href="{{ path('book_edit', {'id': book.id}) }}" 
+                                class="btn btn-info btn-block" role="button">Edit</a>
+                        </td>
+                        <td>
+                            <a href="{{ path('book_destroy', {'id': book.id}) }}" 
+                                class="btn btn-danger btn-block" role="button"
+                                onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}   
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

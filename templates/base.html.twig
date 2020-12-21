@@ -18,8 +18,8 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Book Store</a>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{ path('home', {}) }}">Book Store</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,40 +29,34 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Book</a>
+                        <a class="nav-link" href="{{ path('book_create', {}) }}">Book</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Category</a>
+                        <a class="nav-link" href="{{ path('category_create', {}) }}">Category</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categories
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+                    <li class="nav-item">
+                        <form class="form-inline my-2 my-lg-0 navbar-left" action="{{ path('home', {}) }}" method="GET">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item ml-auto">
-                        <a class="nav-link waves-effect waves-light" href="#">
+                        <a class="nav-link waves-effect waves-light" href="{{ path('cart_index', {}) }}">
                         <i class="fa fa-shopping-cart fa-sm" aria-hidden="true"></i>
-                        <span class="badge badge-light">4</span>
+                        <!-- span class="badge badge-light">0</span -->
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <main role="main" class="container">
-
+        <!-- main role="main" class="container" -->
         <!-- content -->
         {% block body %}{% endblock %}
 
-        </main>
         {% block javascripts %}{% endblock %}
+        <!-- /main -->
     </body>
 </html>

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main role="main" class="container-fluid">
+
+    {% for order in orders %}
+    <div class="row border border-dark m-3">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order_book in order.getOrderBooks() %}
+                    <tr>
+                        <td>{{ order_book.getBookId().getName() }}</td>
+                        <td>${{ order_book.getUnitPrice()|format_number({fraction_digit: 2}) }}</td>
+                        <td>{{ order_book.getQuantity() }}</td>
+                        <td>${{ (order_book.getUnitPrice() * order_book.getQuantity())|format_number({fraction_digit: 2}) }}</td>
+                    </tr>
+                {% endfor %} 
+                <tr>
+                    <td colspan="3">Sub Total</td>
+                    <td colspan="1">${{order.getAmount()|format_number({fraction_digit: 2})}}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Discount</td>
+                    <td colspan="1">${{order.getDiscount()|format_number({fraction_digit: 2})}}</td>
+                </tr>  
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td colspan="1">${{ (order.getAmount() - order.getDiscount())|format_number({fraction_digit: 2}) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="1">Billing Address</td>
+                    <td colspan="3">{{order.getBillingAddress()}}</td>
+                </tr>  
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+
+</main>
+{% endblock %}

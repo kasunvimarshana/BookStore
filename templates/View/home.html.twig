@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main role="main" class="container-fluid">
+    <div class="row">
+        <div class="col col-12">
+            <div class="row">
+                {% for book in books %}
+                <div class="col col-md-3 my-3">
+                    <div class="card bg-primary text-center">
+                        <!-- img class="card-img-top" src="" alt="Card image" -->
+                        <div class="card-body">
+                            <h4 class="card-title text-white">{{book.name}}</h4>
+                            <p class="card-text text-white text-left">Category : {{book.categoryid.name}}</p>
+                            <p class="card-text text-white text-left">Price : <b>${{book.price}}</b></p>
+                            <p class="card-text text-white">{{book.description}}</p>
+                            <a href="{{ path('cart_add_book', {'book': book.id}) }}" class="btn btn-warning text-center"><b>Add to Cart</b></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

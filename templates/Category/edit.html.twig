@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main role="main" class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Category Edit [{{ category.name }}]</li>
+        </ol>
+    </nav>
+    <div class="row">
+        <div class="col col-12">
+            <form action="{{ action }}" methos="POST" class="form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" required="required" value="{{ category.name }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
