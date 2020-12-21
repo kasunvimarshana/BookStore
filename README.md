@@ -13,3 +13,7 @@ php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 symfony server:start
 ```
+
+
+#### Coupon Codes
+000001, 000002, 000003, 000004, 000005
